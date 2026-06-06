@@ -1,16 +1,16 @@
-name: Frontend CI
+name: Client CI
 
 on:
   push:
     paths:
-      - "frontend/**"
+      - "client/**"
 
 jobs:
   build:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: frontend
+        working-directory: client
 
     steps:
       - name: Checkout code
