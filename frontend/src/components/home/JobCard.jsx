@@ -1,47 +1,65 @@
 import Link from "next/link";
-import { MapPin, Laptop, Banknote, ArrowRight } from "lucide-react";
-import { Card, CardContent } from "@/components/ui/card";
+import { MapPin, Clock, DollarSign, ArrowUpRight } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 
-export function JobCard({ title, description, location, type, salary, href = "#" }) {
+export function JobCard({
+  title,
+  description,
+  location,
+  type,
+  salary,
+  company,
+  href = "#",
+}) {
   return (
-    <Card className="group flex flex-col justify-between gap-6 rounded-2xl border-border bg-card p-6 transition-colors hover:border-brand/40">
-      <CardContent className="flex flex-col gap-4 p-0">
-        {/* Title + description */}
-        <div className="flex flex-col gap-2">
-          <h3 className="font-heading text-xl font-bold text-foreground">{title}</h3>
-          <p className="text-sm leading-relaxed text-muted-foreground">{description}</p>
+    <Link
+      href={href}
+      className="group flex flex-col gap-5 rounded-2xl border border-white/[0.07] bg-card p-6 transition-all duration-200 hover:border-brand/30 hover:bg-card/80 hover:shadow-lg hover:shadow-brand/5"
+    >
+      {/* Header */}
+      <div className="flex items-start justify-between gap-4">
+        <div className="flex flex-col gap-1">
+          {company && (
+            <span className="text-xs font-medium text-muted-foreground">
+              {company}
+            </span>
+          )}
+          <h3 className="font-heading text-lg font-bold text-foreground group-hover:text-brand transition-colors">
+            {title}
+          </h3>
         </div>
+        <ArrowUpRight className="size-4 shrink-0 text-muted-foreground/40 transition-all group-hover:text-brand group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+      </div>
 
-        {/* Meta badges */}
-        <div className="flex flex-wrap gap-2">
-          <Badge variant="secondary" className="gap-1.5 rounded-full px-3 py-1 text-xs font-medium">
-            <MapPin className="size-3 text-brand" />
-            {location}
-          </Badge>
-          <Badge variant="secondary" className="gap-1.5 rounded-full px-3 py-1 text-xs font-medium">
-            <Laptop className="size-3 text-brand" />
-            {type}
-          </Badge>
-          <Badge variant="secondary" className="gap-1.5 rounded-full px-3 py-1 text-xs font-medium">
-            <Banknote className="size-3 text-brand" />
-            {salary}
-          </Badge>
-        </div>
-      </CardContent>
+      {/* Description */}
+      <p className="line-clamp-2 text-sm leading-relaxed text-muted-foreground">
+        {description}
+      </p>
 
-      {/* Apply link */}
-      <Button
-        asChild
-        variant="ghost"
-        className="w-fit gap-1.5 p-0 text-sm font-medium text-foreground hover:bg-transparent hover:text-brand"
-      >
-        <Link href={href}>
-          Apply Now
-          <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
-        </Link>
-      </Button>
-    </Card>
+      {/* Meta */}
+      <div className="flex flex-wrap gap-2">
+        <Badge
+          variant="secondary"
+          className="gap-1.5 rounded-lg px-2.5 py-1 text-xs font-medium"
+        >
+          <MapPin className="size-3 text-brand" />
+          {location}
+        </Badge>
+        <Badge
+          variant="secondary"
+          className="gap-1.5 rounded-lg px-2.5 py-1 text-xs font-medium"
+        >
+          <Clock className="size-3 text-brand" />
+          {type}
+        </Badge>
+        <Badge
+          variant="secondary"
+          className="gap-1.5 rounded-lg px-2.5 py-1 text-xs font-medium"
+        >
+          <DollarSign className="size-3 text-brand" />
+          {salary}
+        </Badge>
+      </div>
+    </Link>
   );
 }

@@ -1,14 +1,12 @@
-import { Badge } from "@/components/ui/badge";
-import { BriefcaseBusiness } from "lucide-react";
+import { Sparkles } from "lucide-react";
 
 export function HeroBadge() {
   return (
-    <Badge
-      variant="outline"
-      className="gap-2 rounded-full border-border bg-card px-4 py-1.5 text-xs font-semibold tracking-widest text-foreground uppercase"
-    >
-      <BriefcaseBusiness className="size-3.5 text-brand" />
-      50,000+ New Jobs This Month
-    </Badge>
+    <div className="inline-flex items-center gap-2 rounded-full border border-brand/25 bg-brand/10 px-4 py-1.5">
+      <Sparkles className="size-3.5 text-brand" />
+      <span className="text-xs font-semibold tracking-wider text-brand uppercase">
+        50,000+ New Jobs This Month
+      </span>
+    </div>
   );
 }

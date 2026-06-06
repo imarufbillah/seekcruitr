@@ -1,132 +1,125 @@
 import {
-  Search,
+  ScanSearch,
   TrendingUp,
   Building2,
-  Bookmark,
-  Zap,
+  BookmarkCheck,
+  MousePointerClick,
   FileText,
-  Hexagon,
-  ArrowUpRight,
+  Brain,
+  Rocket,
 } from "lucide-react";
-import { Card, CardContent } from "@/components/ui/card";
 
 const FEATURES = [
   {
-    icon: Search,
+    icon: ScanSearch,
     title: "Smart Search",
-    description: "Find your ideal job with advanced filters.",
+    description:
+      "Laser-targeted filters surface the exact roles you're qualified for.",
   },
   {
     icon: TrendingUp,
-    title: "Salary Insights",
-    description: "Get real salary data to negotiate confidently.",
+    title: "Salary Intelligence",
+    description:
+      "Real-time compensation data from verified offers — negotiate with confidence.",
   },
   {
     icon: Building2,
-    title: "Top Companies",
-    description: "Apply to vetted companies that are hiring.",
+    title: "Vetted Companies",
+    description:
+      "Every employer is reviewed for culture, pay transparency, and growth.",
   },
   {
-    icon: Bookmark,
+    icon: BookmarkCheck,
     title: "Saved Jobs",
-    description: "Manage apps & favorites on your dashboard.",
+    description:
+      "Bookmark, compare, and manage your pipeline from one clean dashboard.",
   },
   {
-    icon: Zap,
+    icon: MousePointerClick,
     title: "One-Click Apply",
-    description: "Simplify your job applications for an easier process!",
+    description:
+      "Apply to any role instantly. Your profile does the work for you.",
   },
   {
     icon: FileText,
-    title: "Resume Builder",
-    description: "Create professional resumes with modern templates.",
+    title: "AI Resume Builder",
+    description:
+      "Generate a tailored resume for each role in under 30 seconds.",
   },
   {
-    icon: Hexagon,
+    icon: Brain,
     title: "Skill-Based Matching",
-    description: "Discover jobs that match your skills and experience.",
+    description:
+      "AI maps your skills to open roles — not just titles and degrees.",
   },
   {
-    icon: ArrowUpRight,
-    title: "Career Growth Resources",
-    description: "Boost your career with quick interview tips.",
+    icon: Rocket,
+    title: "Career Acceleration",
+    description: "Interview prep, salary guides, and growth tracks built in.",
   },
 ];
 
-function FeatureItem({ icon: Icon, title, description }) {
+function SectionLabel({ children }) {
   return (
-    <div className="flex items-start gap-4">
-      {/* Icon box */}
-      <div className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-secondary">
-        <Icon className="size-5 text-brand" strokeWidth={1.5} />
-      </div>
-
-      {/* Text */}
-      <div className="flex flex-col gap-1">
-        <p className="font-heading text-sm font-semibold text-foreground">{title}</p>
-        <p className="text-sm leading-relaxed text-muted-foreground">{description}</p>
-      </div>
+    <div className="flex items-center gap-2">
+      <span className="size-1.5 rounded-full bg-brand" aria-hidden="true" />
+      <span className="font-sans text-xs font-semibold tracking-[0.18em] text-brand uppercase">
+        {children}
+      </span>
+      <span className="size-1.5 rounded-full bg-brand" aria-hidden="true" />
     </div>
   );
 }
 
 export function Features() {
-  const topRow = FEATURES.slice(0, 4);
-  const bottomRow = FEATURES.slice(4);
-
   return (
-    <section className="w-full bg-background py-24">
+    <section className="w-full bg-background py-28">
       <div className="mx-auto flex max-w-5xl flex-col items-center gap-16 px-4">
-
-        {/* Section header */}
-        <div className="flex flex-col items-center gap-4 text-center">
-          <div className="flex items-center gap-2">
-            <span className="size-2 rounded-sm bg-brand" aria-hidden="true" />
-            <span className="font-sans text-xs font-semibold tracking-[0.2em] text-brand uppercase">
-              Features Job
-            </span>
-            <span className="size-2 rounded-sm bg-brand" aria-hidden="true" />
-          </div>
-
-          <h2 className="font-heading max-w-lg text-4xl font-bold tracking-tight text-foreground md:text-5xl">
+        {/* Header */}
+        <div className="flex flex-col items-center gap-5 text-center">
+          <SectionLabel>Platform Features</SectionLabel>
+          <h2 className="font-heading max-w-xl text-4xl font-bold tracking-tight text-foreground md:text-5xl">
             Everything you need
-            <br />
-            to succeed
+            <br className="hidden sm:block" /> to land the role
           </h2>
+          <p className="max-w-md text-sm text-muted-foreground">
+            Built for ambitious professionals who want more signal and less
+            noise in their job search.
+          </p>
         </div>
 
-        {/* Feature grid — 4 cols, 2 rows */}
-        <Card className="w-full border-border bg-card">
-          <CardContent className="flex flex-col gap-0 p-0">
-            {/* Top row */}
-            <div className="grid grid-cols-1 gap-px sm:grid-cols-2 lg:grid-cols-4">
-              {topRow.map((feature, i) => (
-                <div
-                  key={feature.title}
-                  className="p-6 lg:border-r border-border last:border-r-0"
-                >
-                  <FeatureItem {...feature} />
-                </div>
-              ))}
+        {/* Feature grid */}
+        <div className="w-full rounded-2xl border border-white/[0.07] bg-card">
+          {[FEATURES.slice(0, 4), FEATURES.slice(4)].map((row, rowIdx) => (
+            <div key={rowIdx}>
+              {rowIdx > 0 && <div className="h-px w-full bg-border" />}
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
+                {row.map((f, i) => {
+                  const Icon = f.icon;
+                  const isLast = i === row.length - 1;
+                  return (
+                    <div
+                      key={f.title}
+                      className={`flex flex-col gap-4 p-7 transition-colors hover:bg-accent/30 ${!isLast ? "lg:border-r border-border" : ""}`}
+                    >
+                      <div className="flex size-10 items-center justify-center rounded-xl bg-brand/10">
+                        <Icon className="size-5 text-brand" strokeWidth={1.5} />
+                      </div>
+                      <div className="flex flex-col gap-1.5">
+                        <p className="font-heading text-sm font-semibold text-foreground">
+                          {f.title}
+                        </p>
+                        <p className="text-xs leading-relaxed text-muted-foreground">
+                          {f.description}
+                        </p>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
             </div>
-
-            {/* Horizontal divider */}
-            <div className="h-px w-full bg-border" />
-
-            {/* Bottom row */}
-            <div className="grid grid-cols-1 gap-px sm:grid-cols-2 lg:grid-cols-4">
-              {bottomRow.map((feature) => (
-                <div
-                  key={feature.title}
-                  className="p-6 lg:border-r border-border last:border-r-0"
-                >
-                  <FeatureItem {...feature} />
-                </div>
-              ))}
-            </div>
-          </CardContent>
-        </Card>
-
+          ))}
+        </div>
       </div>
     </section>
   );
