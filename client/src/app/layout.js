@@ -1,18 +1,21 @@
-import { Plus_Jakarta_Sans, Inter } from "next/font/google";
+import { Syne, DM_Sans, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
-import { Navbar } from "@/components/layout/Navbar";
-import { Footer } from "@/components/layout/Footer";
 
-const plusJakartaSans = Plus_Jakarta_Sans({
+const syne = Syne({
   variable: "--font-heading",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800"],
+  weight: ["400", "600", "700"],
 });
 
-const inter = Inter({
+const dmSans = DM_Sans({
   variable: "--font-sans",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["400", "500"],
+});
+
+const jetBrains_Mono = JetBrains_Mono({
+  variable: "--font-mono",
+  subsets: ["latin"],
 });
 
 export const metadata = {
@@ -24,12 +27,10 @@ export default function RootLayout({ children }) {
   return (
     <html
       lang="en"
-      className={`${plusJakartaSans.variable} ${inter.variable} antialiased dark`}
+      className={`${syne.variable} ${dmSans.variable} ${jetBrains_Mono.variable} antialiased dark`}
     >
       <body>
-        <Navbar />
         <main>{children}</main>
-        <Footer />
       </body>
     </html>
   );
