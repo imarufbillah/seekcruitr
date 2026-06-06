@@ -34,8 +34,8 @@ function titleFromPathname(pathname, navItems) {
 const MOCK_USER = {
   name: "Alex Johnson",
   email: "alex@example.com",
-  role: "seeker" /* "seeker" | "recruiter" | "admin" */,
-  plan: "premium" /* "free" | "pro" | "premium" | "growth" | "enterprise" */,
+  role: "recruiter" /* "seeker" | "recruiter" | "admin" */,
+  plan: "growth" /* "free" | "pro" | "premium" | "growth" | "enterprise" */,
 };
 
 /* ── Dashboard root layout ───────────────────────────────────────── */
