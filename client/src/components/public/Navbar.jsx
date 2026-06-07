@@ -7,7 +7,7 @@ import { usePathname } from "next/navigation";
 import { Menu, X, LayoutDashboard, User, Settings, LogOut } from "lucide-react";
 import { cn } from "@/lib/utils";
 import BrandMark from "@/components/shared/BrandMark";
-import { useSession } from "@/lib/auth-client";
+import { signOut, useSession } from "@/lib/auth-client";
 import {
   DropdownMenu,
   DropdownMenuTrigger,
@@ -269,7 +269,7 @@ function UserMenu({ session }) {
           <button
             type="button"
             onClick={() => {
-              /* TODO: call signOut() from auth-client */
+              signOut();
             }}
             className={cn(
               "flex w-full cursor-pointer items-center gap-3 rounded-lg px-3 py-2",
@@ -365,7 +365,8 @@ function MobileAuthSection({ session, onClose }) {
         <button
           type="button"
           onClick={() => {
-            onClose(); /* TODO: signOut() */
+            signOut();
+            onClose();
           }}
           className="flex items-center gap-3 rounded-lg px-3 py-2.5 font-sans text-[14px] text-destructive hover:bg-destructive/10 transition-colors"
         >
