@@ -1,16 +1,14 @@
-const { MongoClient, ServerApiVersion } = require("mongodb");
+const mongoose = require("mongoose");
 require("dotenv").config();
 
-const uri = process.env.MONGO_DB_URI;
+const connectDB = async () => {
+  try {
+    await mongoose.connect(process.env.MONGO_DB_URI);
+    console.log("MongoDB connected");
+  } catch (error) {
+    console.error("MongoDB connection failed:", error.message);
+    process.exit(1);
+  }
+};
 
-const client = new MongoClient(uri, {
-  serverApi: {
-    version: ServerApiVersion.v1,
-    strict: true,
-    deprecationErrors: true,
-  },
-});
-
-const database = client.db("seekcruitr");
-
-module.exports = { client, database };
+module.exports = connectDB;
