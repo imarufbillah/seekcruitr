@@ -3,7 +3,9 @@ require("dotenv").config();
 
 const connectDB = async () => {
   try {
-    await mongoose.connect(process.env.MONGO_DB_URI);
+    await mongoose.connect(process.env.MONGO_DB_URI, {
+      dbName: "seekcruitr",
+    });
     console.log("MongoDB connected");
   } catch (error) {
     console.error("MongoDB connection failed:", error.message);

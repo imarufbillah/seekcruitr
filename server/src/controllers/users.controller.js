@@ -1,5 +1,6 @@
 const User = require("../models/User.model");
 
+// Endpoint to set user role (seeker or recruiter)
 const setUserRole = async (req, res) => {
   try {
     const { userId, role } = req.body;
@@ -27,4 +28,15 @@ const setUserRole = async (req, res) => {
   }
 };
 
-module.exports = { setUserRole };
+// Endpoint to get all users (for admin dashboard)
+const getAllUsers = async (req, res) => {
+  try {
+    const users = await User.find({});
+    res.status(200).json(users);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Server error", error: error.message });
+  }
+};
+
+module.exports = { setUserRole, getAllUsers };
