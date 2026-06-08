@@ -2,6 +2,10 @@ import { betterAuth } from "better-auth";
 import { MongoClient } from "mongodb";
 import { mongodbAdapter } from "better-auth/adapters/mongodb";
 
+if (!process.env.MONGO_DB_URI) {
+  throw new Error("Missing environment variable: MONGO_DB_URI");
+}
+
 const client = new MongoClient(process.env.MONGO_DB_URI);
 const db = client.db("seekcruitr");
 
