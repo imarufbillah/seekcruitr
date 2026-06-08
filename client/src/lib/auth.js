@@ -15,6 +15,14 @@ export const auth = betterAuth({
         enum: ["seeker", "recruiter", "admin"],
         defaultValue: null,
       },
+      status: {
+        enum: ["active", "suspended"],
+        defaultValue: "active",
+      },
+      plan: {
+        enum: ["free", "pro", "premium", "growth", "enterprise"],
+        defaultValue: "free",
+      },
     },
   },
   emailAndPassword: {
