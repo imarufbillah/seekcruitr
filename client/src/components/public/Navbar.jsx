@@ -7,7 +7,7 @@ import { usePathname } from "next/navigation";
 import { Menu, X, LayoutDashboard, User, Settings, LogOut } from "lucide-react";
 import { cn } from "@/lib/utils";
 import BrandMark from "@/components/shared/BrandMark";
-import { signOut, useSession } from "@/lib/auth-client";
+import { signOut } from "@/lib/auth-client";
 import {
   DropdownMenu,
   DropdownMenuTrigger,
@@ -15,6 +15,7 @@ import {
   DropdownMenuItem,
   DropdownMenuSeparator,
 } from "@/components/ui/dropdown-menu";
+import useCurrentUser from "@/lib/session/client";
 
 const NAV_LINKS = [
   { label: "Browse Jobs", href: "/jobs" },
@@ -383,7 +384,7 @@ function MobileAuthSection({ session, onClose }) {
    ════════════════════════════════════════════════════════════════════ */
 
 export default function Navbar() {
-  const { data: session } = useSession();
+  const session = useCurrentUser();
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
   const isLoggedIn = !!session?.user;
