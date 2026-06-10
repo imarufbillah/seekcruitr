@@ -299,6 +299,16 @@ function RegisterCompanyModal({ open, onClose, onSubmit, recruiterId }) {
       setErrors(e);
       return;
     }
+
+    /* Guard: session must be resolved before we can attach recruiterId */
+    if (!recruiterId) {
+      setErrors({
+        submit:
+          "Your session hasn't loaded yet. Please wait a moment and try again.",
+      });
+      return;
+    }
+
     setLoading(true);
 
     /* Build the payload to exactly match Company.model.js */
@@ -314,22 +324,23 @@ function RegisterCompanyModal({ open, onClose, onSubmit, recruiterId }) {
     };
 
     try {
-      const data = await registerCompany(payload);
-      console.log(data);
+      const { data, error } = await registerCompany(payload);
+
+      if (error) throw new Error(error);
 
       /* Pass the server-returned document back to the page */
+      const companyName = data.name ?? form.name.trim();
       onSubmit({
-        /* fields used by CompanyCard */
         id: data._id,
-        name: data.name,
-        initials: data.name.slice(0, 2),
+        name: companyName,
+        initials: companyName.slice(0, 2),
         industry: data.industry,
         location: data.location,
         employees: form.employees /* keep the display label */,
         description: data.description,
         website: data.websiteUrl,
         logoUrl: data.logoUrl,
-        status: data.status,
+        status: data.status ?? "PENDING",
       });
 
       setForm(EMPTY_FORM);
