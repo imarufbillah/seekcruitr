@@ -28,4 +28,16 @@ const getAllCompanies = async (req, res) => {
   }
 };
 
-module.exports = { postCompany, getAllCompanies };
+// Endpoint to get companies registered by a recruiter (for recruiter dashboard)
+const getCompaniesByRecruiterId = async (req, res) => {
+  try {
+    const { recruiterId } = req.params;
+    const companies = await Company.find({ recruiterId });
+    res.status(200).json(companies);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Server error", error: error.message });
+  }
+};
+
+module.exports = { postCompany, getAllCompanies, getCompaniesByRecruiterId };
