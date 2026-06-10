@@ -29,7 +29,7 @@ import {
 } from "@/components/ui/select";
 import { cn } from "@/lib/utils";
 import useCurrentUser from "@/lib/session/client";
-import { registerCompany } from "@/lib/api-client";
+import { registerCompany } from "@/services/companies.service";
 
 /* ════════════════════════════════════════════════════════════════════
    CONSTANTS
